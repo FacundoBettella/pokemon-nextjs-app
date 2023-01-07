@@ -1,13 +1,40 @@
-import { Html, Head, Main, NextScript } from 'next/document'
+/* Ayuda a que todos los navegadores web muestren igual nuestra pagina  */
+import Document, {
+  Html,
+  Head,
+  Main,
+  NextScript,
+  DocumentContext,
+} from "next/document";
 
-export default function Document() {
-  return (
-    <Html lang="en">
-      <Head />
-      <body>
-        <Main />
-        <NextScript />
-      </body>
-    </Html>
-  )
+import { CssBaseline } from "@nextui-org/react";
+
+class MyDocument extends Document {
+
+  static async getInitialProps(ctx: DocumentContext) {
+
+    // Run the parent `getInitialProps`, it now includes the custom `renderPage`
+    const initialProps = await Document.getInitialProps(ctx);
+    return {
+      ...initialProps,
+      styles: <>{initialProps.styles}</>
+    };
+  }
+
+  render() {
+    return (
+      <Html lang="es">
+        <title>Static pokemon page</title>
+        <Head>
+          {CssBaseline.flush()} 
+        </Head>
+        <body>
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    );
+  }
 }
+
+export default MyDocument;
