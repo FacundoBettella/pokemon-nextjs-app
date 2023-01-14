@@ -26,7 +26,7 @@ class MyDocument extends Document {
       <Html lang="es">
         <title>Static pokemon page</title>
         <Head>
-          {CssBaseline.flush()} 
+          {CssBaseline.flush()}
         </Head>
         <body>
           <Main />
