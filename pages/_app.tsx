@@ -8,7 +8,7 @@ import '../styles/globals.css'
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <NextUIProvider theme={ darkTheme }>
+    <NextUIProvider theme={darkTheme}>
       <Component {...pageProps} />
     </NextUIProvider>
   )

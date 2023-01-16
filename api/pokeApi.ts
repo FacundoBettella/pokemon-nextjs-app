@@ -1,7 +1,7 @@
 import axios from 'axios';
 import https from 'https';
 
-/* MAGIC para solucionar: UNABLE_TO_GET_ISSUER_CERT_LOCALLY */
+/* MAGIA para solucionar: UNABLE_TO_GET_ISSUER_CERT_LOCALLY */
 const httpsAgent = new https.Agent({
   rejectUnauthorized: false,
 });
