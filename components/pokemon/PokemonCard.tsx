@@ -20,6 +20,9 @@ export const PokemonCard: FC<IProps> = ({ pokemon }) => {
             <Card
                 isHoverable
                 onClickCapture={handlePokemonRoute}
+                css={{
+                    cursor: "pointer"
+                }}
             >
                 <Card.Body css={{ p: 1 }}>
                     <Card.Image src={pokemon.img} width="100%" height={140} />
