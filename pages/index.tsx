@@ -11,7 +11,6 @@ interface Props {
 }
 
 const HomePage: FC<Props> = ({ pokemons }) => {
-
   return (
     <Layout title="Listado de Pókemons">
       <Grid.Container gap={2} justify="flex-start">

@@ -7,6 +7,7 @@ interface IProps {
 }
 
 const FavoritesPokemons: FC<IProps> = ({ pokemons }) => {
+    
     return (
         <Grid.Container gap={2} direction='row' justify='flex-start'>
             {

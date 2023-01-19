@@ -12,7 +12,7 @@ export const PokemonCard: FC<IProps> = ({ pokemon }) => {
     const router = useRouter();
 
     const handlePokemonRoute = () => {
-        router.push(`/pokemon/${pokemon.id}`);
+        router.push(`/name/${pokemon.name}`);
     }
 
     return (

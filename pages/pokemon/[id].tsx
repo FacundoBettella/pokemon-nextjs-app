@@ -6,17 +6,15 @@ import { Button, Card, Container, Grid, Text } from "@nextui-org/react";
 
 import confetti from "canvas-confetti";
 
+import { PokemonDTO } from "../../interfaces";
 import { Layout } from "../../components/layouts";
-import { Pokemon } from "../../interfaces";
-import { pokeApi } from "../../api";
-import { localFavorites } from "../../utils";
+import { getPokemonInfo, localFavorites } from "../../utils";
 
 interface IProps {
-    pokemon: Pokemon;
+    pokemon: PokemonDTO;
 }
 
 const PokemonPage: FC<IProps> = ({ pokemon }) => {
-
     const [isInFavorites, setIsInFavorites] = useState(localFavorites.existInFavorites(pokemon.id));
 
     const onToggleFavorite = () => {
@@ -34,7 +32,7 @@ const PokemonPage: FC<IProps> = ({ pokemon }) => {
                 x: 1,
                 y: 0,
             }
-        })        
+        })
     };
 
     return (
@@ -45,7 +43,7 @@ const PokemonPage: FC<IProps> = ({ pokemon }) => {
                         <Card.Body>
                             <Card.Image
                                 src={
-                                    pokemon.sprites.other?.dream_world.front_default ||
+                                    pokemon.principalImg ||
                                     "no-image.png"
                                 }
                                 alt={pokemon.name}
@@ -77,25 +75,29 @@ const PokemonPage: FC<IProps> = ({ pokemon }) => {
 
                             <Container direction="row" display="flex" justify="space-between">
                                 <Image
-                                    src={pokemon.sprites.front_default}
+                                    src={pokemon.sprites.front_default ||
+                                        "no-image.png"}
                                     alt={pokemon.name}
                                     width={100}
                                     height={150}
                                 />
                                 <Image
-                                    src={pokemon.sprites.back_default}
+                                    src={pokemon.sprites.back_default ||
+                                        "no-image.png"}
                                     alt={pokemon.name}
                                     width={100}
                                     height={150}
                                 />
                                 <Image
-                                    src={pokemon.sprites.front_shiny}
+                                    src={pokemon.sprites.front_shiny ||
+                                        "no-image.png"}
                                     alt={pokemon.name}
                                     width={100}
                                     height={150}
                                 />
                                 <Image
-                                    src={pokemon.sprites.back_shiny}
+                                    src={pokemon.sprites.back_shiny ||
+                                        "no-image.png"}
                                     alt={pokemon.name}
                                     width={100}
                                     height={150}
@@ -125,11 +127,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (context) => {
     const { id } = context.params as { id: string };
 
-    const { data } = await pokeApi.get<Pokemon>(`/pokemon/${id}`);
-
     return {
         props: {
-            pokemon: data,
+            pokemon: await getPokemonInfo(id),
         },
     };
 };
