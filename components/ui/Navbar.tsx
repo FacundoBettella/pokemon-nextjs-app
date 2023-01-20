@@ -30,7 +30,7 @@ export const Navbar = () => {
                 flex: 1
             }} />
             <Link href={"/favorites"}>
-                <Text css={{ paddingRight: 30 }} color="white" h3>Favoritos</Text>
+                <Text css={{ paddingRight: 30 }} color="white" h3>Favs</Text>
             </Link>
         </div>
     )

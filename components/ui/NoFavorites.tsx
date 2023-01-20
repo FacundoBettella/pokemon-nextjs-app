@@ -15,7 +15,7 @@ export const NoFavorites = () => {
         }}
       >
         <Text h1>
-          No hay favoritos
+          No Favs
         </Text>
         <Image
           src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/132.svg"
