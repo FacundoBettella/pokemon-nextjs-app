@@ -71,8 +71,6 @@ const PokemonPage: FC<IProps> = ({ pokemon }) => {
                             </Button>
                         </Card.Header>
                         <Card.Body>
-                            <Text size={30}> Sprites:</Text>
-
                             <Container direction="row" display="flex" justify="space-between">
                                 <Image
                                     src={pokemon.sprites.front_default ||
@@ -120,17 +118,30 @@ export const getStaticPaths: GetStaticPaths = async () => {
         paths: pokemon151.map((id) => ({
             params: { id: id },
         })),
-        fallback: false,
+        // fallback: false,
+        fallback: "blocking"
     };
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
     const { id } = context.params as { id: string };
 
+    const pokemon = await getPokemonInfo(id);
+
+    if (!pokemon) {
+        return {
+            redirect: {
+                destination: "/",
+                permanent: false,
+            }
+        }
+    }
+
     return {
         props: {
-            pokemon: await getPokemonInfo(id),
+            pokemon: pokemon,
         },
+        revalidate: 86400,
     };
 };
 export default PokemonPage;
